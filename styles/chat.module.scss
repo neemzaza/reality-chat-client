@@ -1,0 +1,236 @@
+$theme-color: rgb(0, 153, 208);
+$you-chat-dark: rgb(55, 55, 55);
+$body-theme: rgb(31, 42, 43);
+
+@keyframes popupChat {
+    0% {
+        width: 0px;
+        height: 0px;
+    } 50%{
+        width: 160px;
+        height: 1.35rem;
+    } 100% {
+        width: 150px;
+        height: 1.25rem;
+    }
+}
+
+.grid {
+    display: grid;
+
+    &.page {
+        grid-template-columns: 350px 1fr 300px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        &.page {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+    }
+}
+
+.header {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.contact {
+    height: 80vh;
+    padding: 1.5rem;
+    overflow-y: scroll;
+}
+
+.people {
+    padding: 1.5rem;
+    border-radius: 2rem;
+    border: 2px solid $you-chat-dark;
+    transition: .2s;
+    position: relative;
+    margin-bottom: 2rem;
+    height: 3rem;
+
+    &:hover {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+        border-color: rgba(0, 0, 0, 0.125);
+        cursor: pointer;
+    }
+
+    &.active {
+        border: 2px solid $theme-color;
+
+        img {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            top: -2rem;
+            border-radius: 50%;
+            border: 2px solid $theme-color;
+        }
+
+        .lastMsg {
+            margin: 0;
+        }
+    }
+
+    // People Name
+    .name {
+        display: flex;  
+        align-items: center;
+
+        b {
+            margin-left: 1rem;
+            transition: .2s;
+        }
+
+        img {
+            transition: .2s;
+        }
+    }
+
+    
+
+    .lastMsg {
+        width: 150px;
+        padding: .35rem;
+        font-size: .8rem;
+        position: absolute;
+        margin-top: .5rem;
+        text-align: center;
+        overflow: hidden;
+        display: inline-block;
+        white-space: nowrap;
+        animation: 1s popupChat forwards;
+
+        &.you {
+            background: $you-chat-dark;
+            border-radius: .25rem .75rem .75rem .75rem;
+            left: 3rem;
+        }
+
+        &.me {
+            background: $theme-color;
+            border-radius: .75rem .25rem .75rem .75rem;
+            right: 1.5rem;
+        }
+    }
+    
+
+    span {
+        &.time {
+            
+        }
+    }
+
+    .alert {
+        background: red;
+        position: absolute;
+        padding: .25rem;
+        border-radius: .65rem;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%);
+        color: #fff;
+    }
+}
+
+.inChat::-webkit-scrollbar, .contact::-webkit-scrollbar {
+    background: $body-theme;
+    width: .5rem;
+}
+
+.inChat::-webkit-scrollbar-thumb, .contact::-webkit-scrollbar-thumb {
+    background: $you-chat-dark;
+    border-radius: 2rem;
+    margin: 1rem;
+}
+
+.contentSide {
+    height: 100vh;
+    position: relative;
+
+    .inChat {
+        height: 100%;
+        position: relative;
+        overflow-x: hidden;
+
+        .chatParent {
+            width: 100%;
+            height: 2.5rem;
+            padding-top: 2rem;
+            position: relative;
+            display: flex;
+            padding-left: .5rem;
+        }
+
+        .chatmsg {
+            padding: .5rem;
+            font-size: 1rem;
+            overflow: hidden;
+            position: relative;
+            width: fit-content;
+            margin-left: .5rem;
+            margin-right: 1rem;
+
+            &.you {               
+                background: $you-chat-dark;
+                border-radius: .75rem .75rem .75rem .25rem;
+            }
+
+            &.me {
+                background: $theme-color;
+                border-radius: .75rem .75rem .25rem .75rem;
+                position: absolute;
+                right: 0;
+            }
+        }
+
+    }
+
+    .msgZone {
+        width: 100%;
+        height: 3rem;
+        background: $you-chat-dark;
+        position: absolute;
+        bottom: 0;
+
+        .chatInput {
+            border: none;
+            outline: none;
+            background: $you-chat-dark;
+            color: #fff;
+            padding: .75rem;
+            border-radius: 1rem;
+            position: relative;
+            width: 70%;
+            left: 50%;
+            top: 0;
+            font-size: 1rem;
+            transform: translateX(-50%);
+            transition: .2s;
+
+            &:focus {
+                top: -1rem;
+            }
+        }
+
+        .btnSubmit {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            transition: .2s;
+
+            i {
+                transition: .2s;
+            }
+
+            &:hover {
+                i {
+                    color: $theme-color;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
